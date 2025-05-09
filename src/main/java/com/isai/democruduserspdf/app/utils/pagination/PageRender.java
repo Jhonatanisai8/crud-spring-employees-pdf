@@ -46,6 +46,10 @@ public class PageRender<T> {
         }
     }
 
+    public Boolean isFirst() {
+        return page.isFirst();
+    }
+
     public Boolean isLast() {
         return page.isLast();
     }
