@@ -27,15 +27,15 @@ public class Employee implements Serializable {
     private Long idEmployee;
 
     @NotEmpty
-    private String name;
+    private String firstName;
 
     @NotEmpty
     private String lastName;
 
     @NotEmpty
     @Email
-
     private String email;
+
     @NotEmpty
     private String phone;
 
