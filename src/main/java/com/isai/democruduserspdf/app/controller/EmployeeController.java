@@ -73,7 +73,7 @@ public class EmployeeController {
         String message = (employee.getIdEmployee() != null) ? "Empleado actualizado exitosamente." : "Empleado registrado exitosamente.";
         employeeRepository.save(employee);
         status.setComplete();
-        flash.addFlashAttribute("message", message);
+        flash.addFlashAttribute("success", message);
         return "redirect:/list";
     }
 
@@ -84,7 +84,6 @@ public class EmployeeController {
             RedirectAttributes flash) {
         Employee employee = null;
         if (employeeId > 0) {
-            flash.addFlashAttribute("error", "El empleado no existe.");
             employee = employeeRepository.findById(employeeId).orElseThrow();
             if (Objects.isNull(employee)) {
                 flash.addFlashAttribute("error", "El empleado no existe.");
@@ -105,7 +104,7 @@ public class EmployeeController {
             RedirectAttributes flash) {
         if (employeeId > 0) {
             employeeRepository.deleteById(employeeId);
-            flash.addFlashAttribute("error", "Empleado eliminado exitosamente.");
+            flash.addFlashAttribute("success", "Empleado eliminado exitosamente.");
         }
         return "redirect:/list";
     }
