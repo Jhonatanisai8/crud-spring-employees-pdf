@@ -51,7 +51,7 @@ public class EmployeeController {
     }
 
     @GetMapping(path = "/register-employee")
-    public String mostrarFormularioRegistrarEmpleado(
+    public String showEmployeeRegistrationForm(
             Map<String, Object> model) {
         Employee employee = new Employee();
         model.put("tittle", "Registrar Empleado");
