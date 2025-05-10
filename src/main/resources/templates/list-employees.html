@@ -23,11 +23,11 @@
                    class="btn btn-primary">
                     Agregar Empleado
                 </a>
-                <a th:href="@{/export-pdf}"
+                <a sec:authorize="hasRole('ADMIN')" th:href="@{/export-pdf}"
                    class="btn btn-success">
                     Exportar a PDF
                 </a>
-                <a th:href="@{/export-excel}"
+                <a sec:authorize="hasRole('ADMIN')" th:href="@{/export-excel}"
                    class="btn btn-secondary">
                     Exportar a Excel
                 </a>

@@ -37,9 +37,9 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        String[] allowedPaths = {"/register-employee", "/edit-employee/**", "/remove-employee/**"};
+        String[] allowedPaths = {"/edit-employee/**", "/remove-employee/**"};
         http.authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/").permitAll()
+                .requestMatchers("/", "/register-employee").hasAnyRole("USER", "ADMIN")
                 .requestMatchers(allowedPaths).hasRole("ADMIN")
                 .anyRequest().authenticated()
         ).formLogin(formLogin -> formLogin
