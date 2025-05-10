@@ -16,6 +16,11 @@
             <h5 class="mb-0" th:text="${tittle}"></h5>
         </div>
         <div class="card-body">
+            <h4 class="card-title">
+                <a th:href="@{/form-employee}" class="btn btn-primary">
+                    Agregar Empleado
+                </a>
+            </h4>
             <table class="table table-striped table-bordered table-hover">
                 <thead class="thead-dark">
                 <tr>
@@ -27,7 +32,9 @@
                     <th>Género</th>
                     <th>Salario</th>
                     <th>Fecha de Nacimiento</th>
-                    <th>Acciones</th>
+                    <th>Detalles</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -41,8 +48,17 @@
                     <td th:text="${#numbers.formatDecimal(employee.salary, 1, 'DEFAULT', 2, 'DEFAULT')}"></td>
                     <td th:text="${#dates.format(employee.birthDate, 'dd-MM-yyyy')}"></td>
                     <td>
-                        <a href="#" class="btn btn-sm btn-outline-primary">Editar</a>
-                        <a href="#" class="btn btn-sm btn-outline-danger ml-1">Eliminar</a>
+                        <a th:href="@{/view-employee-detail/{id}(id=${employee.idEmployee})}"
+                           class="btn btn-info btn-sm">Detalles</a>
+                    </td>
+                    <td>
+                        <a th:href="@{/register-employee/{id}(id=${employee.idEmployee})}"
+                           class="btn btn-warning btn-sm">Editar</a>
+                    </td>
+                    <td>
+                        <a th:href="@{/remove-employee/{id}(id=${employee.idEmployee})}"
+                           class="btn btn-danger btn-sm"
+                           onclick="return confirm('¿Estas seguro de eliminar al empleado?')">Eliminar</a>
                     </td>
                 </tr>
                 </tbody>
