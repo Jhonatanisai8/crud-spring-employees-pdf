@@ -98,4 +98,15 @@ public class EmployeeController {
         model.put("employee", employee);
         return "form-employee";
     }
+
+    @GetMapping(path = "/remove-employee/{employeeId}")
+    public String deleteEmployee(
+            @PathVariable(value = "employeeId") Long employeeId,
+            RedirectAttributes flash) {
+        if (employeeId > 0) {
+            employeeRepository.deleteById(employeeId);
+            flash.addFlashAttribute("error", "Empleado eliminado exitosamente.");
+        }
+        return "redirect:/list";
+    }
 }
