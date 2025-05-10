@@ -9,9 +9,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.Map;
+import java.util.Objects;
 
 @Controller
 @RequiredArgsConstructor
@@ -28,5 +30,20 @@ public class EmployeeController {
         model.addAttribute("employees", employees);
         model.addAttribute("pageRender", pageRender);
         return "list-employees";
+    }
+
+    @GetMapping("/verDetalleEmpleado/{employeeId}")
+    public String viewEmployeeDetail(
+            @PathVariable(value = "employeeId") Long employeeId,
+            Map<String, Object> model,
+            RedirectAttributes flash) {
+        Employee employee = employeeRepository.findById(id).orElseThrow();
+        if (Objects.isNull(employee)) {
+            flash.addFlashAttribute("message", "El empleado no existe.");
+            return "redirect:/list";
+        }
+        model.put("employee", employee);
+        model.put("tittle", "Detalle del empleado.".concat(employee.getFirstName()));
+        return "view-employee-details";
     }
 }
