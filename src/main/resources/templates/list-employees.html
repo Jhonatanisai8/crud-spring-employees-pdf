@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="https://www.thymeleaf.org">
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
 <head th:replace="layout/layout :: head">
     <meta charset="UTF-8">
     <title></title>
@@ -42,8 +44,8 @@
                     <th>Salario</th>
                     <th>Fecha de Nacimiento</th>
                     <th>Detalles</th>
-                    <th>Editar</th>
-                    <th>Eliminar</th>
+                    <th sec:authorize="hasRole('ADMIN')">Editar</th>
+                    <th sec:authorize="hasRole('ADMIN')">Eliminar</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -60,11 +62,11 @@
                         <a th:href="@{/view-employee-detail/{id}(id=${employee.idEmployee})}"
                            class="btn btn-info btn-sm">Detalles</a>
                     </td>
-                    <td>
+                    <td sec:authorize="hasRole('ADMIN')">
                         <a th:href="@{/edit-employee/{id}(id=${employee.idEmployee})}"
                            class="btn btn-warning btn-sm">Editar</a>
                     </td>
-                    <td>
+                    <td sec:authorize="hasRole('ADMIN')">
                         <a th:href="@{/remove-employee/{id}(id=${employee.idEmployee})}"
                            class="btn btn-danger btn-sm"
                            onclick="return confirm('¿Estas seguro de eliminar al empleado?')">Eliminar</a>
