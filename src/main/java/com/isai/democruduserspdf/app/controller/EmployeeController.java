@@ -3,6 +3,7 @@ package com.isai.democruduserspdf.app.controller;
 import com.isai.democruduserspdf.app.models.Employee;
 import com.isai.democruduserspdf.app.repositorys.EmployeeRepository;
 import com.isai.democruduserspdf.app.utils.pagination.PageRender;
+import com.isai.democruduserspdf.app.utils.reports.EmployeeExportExcel;
 import com.isai.democruduserspdf.app.utils.reports.EmployeeExportPdf;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -116,7 +117,7 @@ public class EmployeeController {
         return "redirect:/list";
     }
 
-    @GetMapping(path = "/exportar-pdf")
+    @GetMapping(path = "/export-pdf")
     public void exportClientListToPDF(HttpServletResponse response) throws IOException {
         response.setContentType("application/pdf");
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
@@ -127,6 +128,19 @@ public class EmployeeController {
         List<Employee> employees = employeeRepository.findAll();
         EmployeeExportPdf exportPdf = new EmployeeExportPdf(employees);
         exportPdf.exportPdf(response);
+    }
+
+    @GetMapping(path = "/export-excel")
+    public void exportClientListToEXCEL(HttpServletResponse response) throws IOException {
+        response.setContentType("application/octet-stream");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+        String date = dateFormat.format(new Date());
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=EMPLOYEES_" + date + ".xlsx";
+        response.setHeader(headerKey, headerValue);
+        List<Employee> employees = employeeRepository.findAll();
+        EmployeeExportExcel exportExcel = new EmployeeExportExcel(employees);
+        exportExcel.exportExcel(response);
     }
 
 }

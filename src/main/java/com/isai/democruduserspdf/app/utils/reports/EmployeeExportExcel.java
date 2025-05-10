@@ -22,6 +22,7 @@ public class EmployeeExportExcel {
 
     public EmployeeExportExcel(
             List<Employee> employeeList) {
+        this.employeeList = employeeList;
         this.workbook = new XSSFWorkbook();
         this.leaves = this.workbook.createSheet("Employees");
     }
