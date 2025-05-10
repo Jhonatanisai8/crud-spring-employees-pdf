@@ -35,7 +35,7 @@ public class EmployeeController {
         return "list-employees";
     }
 
-    @GetMapping(path = "/verDetalleEmpleado/{employeeId}")
+    @GetMapping(path = "/view-employee-detail/{employeeId}")
     public String viewEmployeeDetail(
             @PathVariable(value = "employeeId") Long employeeId,
             Map<String, Object> model,
@@ -60,7 +60,7 @@ public class EmployeeController {
     }
 
     @PostMapping(path = "/register-employee")
-    public String guardarEmpleado(
+    public String saveEmployee(
             @Valid Employee employee,
             BindingResult result,
             Model model,
@@ -77,4 +77,25 @@ public class EmployeeController {
         return "redirect:/list";
     }
 
+    @GetMapping(path = "/edit-employee/{employeeId}")
+    public String editEmployee(
+            @PathVariable(value = "employeeId") Long employeeId,
+            Map<String, Object> model,
+            RedirectAttributes flash) {
+        Employee employee = null;
+        if (employeeId > 0) {
+            flash.addFlashAttribute("error", "El empleado no existe.");
+            employee = employeeRepository.findById(employeeId).orElseThrow();
+            if (Objects.isNull(employee)) {
+                flash.addFlashAttribute("error", "El empleado no existe.");
+                return "redirect:/list";
+            }
+        } else {
+            flash.addFlashAttribute("message", "El empleado no puede ser cero.");
+            return "redirect:/list";
+        }
+        model.put("tittle", "Editar Empleado");
+        model.put("employee", employee);
+        return "form-employee";
+    }
 }
