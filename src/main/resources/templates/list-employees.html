@@ -17,7 +17,7 @@
         </div>
         <div class="card-body">
             <h4 class="card-title">
-                <a th:href="@{/form-employee}" class="btn btn-primary">
+                <a th:href="@{/register-employee}" class="btn btn-primary">
                     Agregar Empleado
                 </a>
             </h4>
@@ -52,7 +52,7 @@
                            class="btn btn-info btn-sm">Detalles</a>
                     </td>
                     <td>
-                        <a th:href="@{/register-employee/{id}(id=${employee.idEmployee})}"
+                        <a th:href="@{/edit-employee/{id}(id=${employee.idEmployee})}"
                            class="btn btn-warning btn-sm">Editar</a>
                     </td>
                     <td>
