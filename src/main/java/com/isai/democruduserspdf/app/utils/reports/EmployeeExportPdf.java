@@ -25,9 +25,9 @@ public class EmployeeExportPdf {
 
     private void writeHeadPDF(PdfPTable pdfTable) {
         PdfPCell cell = new PdfPCell();
-        cell.setBackgroundColor(Color.ORANGE);
-        cell.setPadding(5);
-        Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+        cell.setBackgroundColor(Color.GREEN);
+        cell.setPadding(2);
+        Font font = FontFactory.getFont(FontFactory.COURIER);
         font.setColor(Color.BLACK);
         cell.setPhrase(new Phrase("ID", font));
         pdfTable.addCell(cell);
@@ -64,16 +64,16 @@ public class EmployeeExportPdf {
         Document document = new Document(PageSize.A4);
         PdfWriter.getInstance(document, response.getOutputStream());
         document.open();
-        Font font = FontFactory.getFont(FontFactory.HELVETICA);
-        font.setSize(17);
+        Font font = FontFactory.getFont(FontFactory.TIMES_ROMAN);
+        font.setSize(12);
         font.setColor(Color.BLACK);
         Paragraph title = new Paragraph("Reporte de Empleados", font);
         title.setAlignment(Element.ALIGN_CENTER);
         document.add(title);
         PdfPTable pdfTable = new PdfPTable(8);
         pdfTable.setWidthPercentage(100);
-        pdfTable.setSpacingBefore(10);
-        pdfTable.setWidths(new float[]{1.5f, 4f, 4f, 3f, 3f, 3f, 3f, 3f});
+        pdfTable.setSpacingBefore(15);
+        pdfTable.setWidths(new float[]{1f, 2.5f, 2.5f, 5f, 3f, 1.8f, 1.8f, 2.6f});
         pdfTable.setWidthPercentage(110);
         writeHeadPDF(pdfTable);
         writeTableData(pdfTable);
