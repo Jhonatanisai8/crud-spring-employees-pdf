@@ -46,7 +46,7 @@ public class EmployeeController {
             return "redirect:/list";
         }
         model.put("employee", employee);
-        model.put("tittle", "Detalle del empleado.".concat(employee.getFirstName()));
+        model.put("tittle", "Detalle del empleado ".concat(employee.getFirstName()));
         return "view-employee-details";
     }
 
