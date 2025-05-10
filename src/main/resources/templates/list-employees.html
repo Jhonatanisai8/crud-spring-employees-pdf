@@ -17,8 +17,17 @@
         </div>
         <div class="card-body">
             <h4 class="card-title">
-                <a th:href="@{/register-employee}" class="btn btn-primary">
+                <a th:href="@{/register-employee}"
+                   class="btn btn-primary">
                     Agregar Empleado
+                </a>
+                <a th:href="@{/exportar-pdf}"
+                   class="btn btn-success">
+                    Exportar a PDF
+                </a>
+                <a th:href="@{/exportar-excel}"
+                   class="btn btn-secondary">
+                    Exportar a Excel
                 </a>
             </h4>
             <table class="table table-striped table-bordered table-hover">
