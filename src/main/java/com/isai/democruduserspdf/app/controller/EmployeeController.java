@@ -26,7 +26,7 @@ public class EmployeeController {
     @RequestMapping(path = {"/", "/list"}, method = RequestMethod.GET)
     public String listEmployees(@RequestParam(name = "page", defaultValue = "0") int page,
                                 Model model) {
-        Pageable pageRequest = PageRequest.of(page, 5);
+        Pageable pageRequest = PageRequest.of(page, 15);
         Page<Employee> employees = employeeRepository.findAll(pageRequest);
         PageRender<Employee> pageRender = new PageRender<>("/list", employees);
         model.addAttribute("tittle", "Listado de Empleados.");
